@@ -1,13 +1,18 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Login - StudySprint</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
@@ -28,25 +33,63 @@
 
             <form onsubmit="loginUser(event)">
 
-                <label>Email</label>
+
+                <!-- NAME -->
+
+                <label>
+                    Name
+                </label>
+
                 <br>
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your name"
+                    required
+                >
+
+
+                <br><br>
+
+
+                <!-- EMAIL -->
+
+                <label>
+                    Email
+                </label>
+
+                <br>
+
                 <input
                     type="email"
+                    id="email"
                     placeholder="Enter your email"
                     required
                 >
 
+
                 <br><br>
 
-                <label>Password</label>
+
+                <!-- PASSWORD -->
+
+                <label>
+                    Password
+                </label>
+
                 <br>
+
                 <input
                     type="password"
-                    placeholder="Enter your password"
+                    id="password"
+                    placeholder="••••••••"
                     required
                 >
 
+
                 <br><br>
+
 
                 <input
                     type="submit"
@@ -61,18 +104,31 @@
 
 </div>
 
+
 <script>
 
 function loginUser(event) {
 
     event.preventDefault();
 
-    window.location.href = "homepage.htm";
+
+    // Get the name entered by the user
+
+    let name =
+        document.getElementById("name").value;
+
+
+    // Send the name to the dashboard
+
+    window.location.href =
+        "homepage.htm?name=" + encodeURIComponent(name);
 
 }
 
 </script>
 
+
 </body>
 
 </html>
+```
