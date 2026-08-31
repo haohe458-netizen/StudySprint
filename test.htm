@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Login - StudySprint</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="login-page">
+   <!-- LEFT SIDE -->
+   <div class="login-brand">
+       <div class="brand-logo">
+           <span>✦</span>
+           StudySprint
+       </div>
+       <h1>
+           Stay on track.
+           <span>Ace your goals.</span>
+       </h1>
+       <p>
+           The beautiful, all-in-one organizer crafted
+           specifically for high school and university
+           students. Keep homework, study sessions and
+           study targets aligned.
+       </p>
+       <div class="feature-boxes">
+           <div class="feature-box"></div>
+           <div class="feature-box"></div>
+           <div class="feature-box"></div>
+       </div>
+   </div>
+   <!-- LOGIN FORM -->
+   <div class="login-form-area">
+       <div class="login-form">
+           <h2>
+               Welcome Back
+           </h2>
+           <p class="form-subtitle">
+               Log in to continue your StudySprint experience.
+           </p>
+           <form onsubmit="loginUser(event)">
+               <label>
+                   Email Address
+               </label>
+               <input type="email" placeholder="your@email.com" required>
+               <label>
+                   Password
+                   <a href="#" class="forgot">
+                       Forgot password?
+                   </a>
+               </label>
+               <input type="password" placeholder="••••••••" required>
+               <input type="submit" value="Log In" class="login-button">
+           </form>
+           <div class="signup">
+               Don't have an account?
+               <a href="#">
+                   Create an account
+               </a>
+           </div>
+       </div>
+   </div>
+</div>
+<script>
+function loginUser(event) {
+   event.preventDefault();
+   window.location.href = "homepage.htm";
+}
+</script>
+</body>
+</html>
+
+
+

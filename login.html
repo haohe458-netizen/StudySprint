@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - StudySprint</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="login-page">
+
+    <div class="login-form-area">
+
+        <div class="login-form">
+
+            <h1>StudySprint</h1>
+
+            <p class="subtitle">
+                Login to your account
+            </p>
+
+            <br>
+
+            <form onsubmit="loginUser(event)">
+
+                <label>Email</label>
+                <br>
+                <input
+                    type="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+                <br><br>
+
+                <label>Password</label>
+                <br>
+                <input
+                    type="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+                <br><br>
+
+                <input
+                    type="submit"
+                    value="Log In"
+                >
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+function loginUser(event) {
+
+    event.preventDefault();
+
+    window.location.href = "homepage.htm";
+
+}
+
+</script>
+
+</body>
+
+</html>
