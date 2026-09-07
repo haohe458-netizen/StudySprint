@@ -1,220 +1,188 @@
-```javascript
-// =================================
+// ==========================================
+// STUDYSPRINT HOMEWORK SYSTEM
+// ==========================================
+
+
 // ADD HOMEWORK
-// =================================
-
-let homework = JSON.parse(localStorage.getItem("homework")) || [];
-
 function addHomework(event) {
 
     event.preventDefault();
 
-    let subject = document.getElementById("subject").value;
-    let task = document.getElementById("task").value;
-    let dueDate = document.getElementById("dueDate").value;
-    let priority = document.getElementById("priority").value;
+    // Get the information from the form
+    let subject =
+        document.getElementById("subject").value;
 
-    if (subject == "" || task == "" || dueDate == "") {
+    let task =
+        document.getElementById("task").value;
 
-        alert("Please complete all required fields.");
+    let dueDate =
+        document.getElementById("dueDate").value;
 
-        return;
-    }
+    let priority =
+        document.getElementById("priority").value;
 
-    let newHomework = {
+
+    // Create a homework object
+    let homework = {
+
         subject: subject,
+
         task: task,
+
         dueDate: dueDate,
+
         priority: priority
+
     };
 
-    homework.push(newHomework);
 
-    localStorage.setItem("homework", JSON.stringify(homework));
+    // Get existing homework
+    let homeworkList =
+        JSON.parse(localStorage.getItem("homework")) || [];
 
+
+    // Add the new homework
+    homeworkList.push(homework);
+
+
+    // Save homework
+    localStorage.setItem(
+        "homework",
+        JSON.stringify(homeworkList)
+    );
+
+
+    // Show confirmation on Planner page
     document.getElementById("message").innerHTML =
-        "<b>Subject:</b> " + subject +
-        "<br>" +
-        "<b>Homework:</b> " + task +
-        "<br>" +
-        "<b>Due Date:</b> " + dueDate +
-        "<br>" +
+
+        "<b>Homework successfully added!</b><br><br>" +
+
+        "<b>Subject:</b> " + subject + "<br>" +
+
+        "<b>Homework:</b> " + task + "<br>" +
+
+        "<b>Due Date:</b> " + dueDate + "<br>" +
+
         "<b>Priority:</b> " + priority;
 
-    alert("Homework added successfully!");
+
+    // Clear the form
+    document.getElementById("subject").value = "";
 
     document.getElementById("task").value = "";
 
-    displayHomework();
+    document.getElementById("dueDate").value = "";
+
+    document.getElementById("priority").value = "Low";
+
 }
 
 
-// =================================
-// DISPLAY HOMEWORK
-// =================================
+// ==========================================
+// DISPLAY HOMEWORK ON DASHBOARD
+// ==========================================
 
 function displayHomework() {
 
-    let list = document.getElementById("homeworkList");
+    let homeworkList =
+        JSON.parse(localStorage.getItem("homework")) || [];
 
-    if (!list) {
+
+    let container =
+        document.getElementById("homeworkList");
+
+
+    // Make sure the dashboard element exists
+    if (!container) {
         return;
     }
 
-    list.innerHTML = "";
 
-    if (homework.length == 0) {
+    // If there is no homework
+    if (homeworkList.length === 0) {
 
-        list.innerHTML = "<p>No homework added yet.</p>";
+        container.innerHTML =
+            "<p>No homework added yet.</p>";
 
         return;
     }
 
-    homework.forEach(function(item, index) {
 
-        let homeworkItem = document.createElement("div");
+    // Clear the container
+    container.innerHTML = "";
+
+
+    // Display every homework task
+    homeworkList.forEach(function(homework, index) {
+
+        let homeworkItem =
+            document.createElement("div");
+
 
         homeworkItem.className = "homework-item";
 
+
         homeworkItem.innerHTML =
-            "<div>" +
-                "<div class='homework-title'>" +
-                    item.subject +
-                "</div>" +
 
-                "<div class='homework-subtitle'>" +
-                    item.task +
-                "</div>" +
+            "<h3>" +
+            homework.task +
+            "</h3>" +
 
-                "<div class='homework-subtitle'>" +
-                    "Priority: " + item.priority +
-                "</div>" +
-            "</div>" +
+            "<p><b>Subject:</b> " +
+            homework.subject +
+            "</p>" +
 
-            "<div>" +
-                "<div class='due'>" +
-                    item.dueDate +
-                "</div>" +
+            "<p><b>Due:</b> " +
+            homework.dueDate +
+            "</p>" +
 
-                "<button onclick='deleteHomework(" + index + ")'>" +
-                    "Delete" +
-                "</button>" +
-            "</div>";
+            "<p><b>Priority:</b> " +
+            homework.priority +
+            "</p>" +
 
-        list.appendChild(homeworkItem);
+            "<button onclick=\"deleteHomework(" +
+            index +
+            ")\">Delete</button>" +
+
+            "<hr>";
+
+
+        container.appendChild(homeworkItem);
 
     });
+
 }
 
 
-// =================================
+// ==========================================
 // DELETE HOMEWORK
-// =================================
+// ==========================================
 
 function deleteHomework(index) {
 
-    homework.splice(index, 1);
+    let homeworkList =
+        JSON.parse(localStorage.getItem("homework")) || [];
 
-    localStorage.setItem("homework", JSON.stringify(homework));
 
+    // Remove the selected homework
+    homeworkList.splice(index, 1);
+
+
+    // Save the updated list
+    localStorage.setItem(
+        "homework",
+        JSON.stringify(homeworkList)
+    );
+
+
+    // Refresh the dashboard
     displayHomework();
 
 }
 
 
-// =================================
-// POMODORO TIMER
-// =================================
-
-let time = 25 * 60;
-
-let timerInterval = null;
-
-let timerRunning = false;
-
-
-// Update timer display
-function updateTimer() {
-
-    let timer = document.getElementById("timer");
-
-    if (!timer) {
-        return;
-    }
-
-    let minutes = Math.floor(time / 60);
-
-    let seconds = time % 60;
-
-    if (seconds < 10) {
-        seconds = "0" + seconds;
-    }
-
-    timer.innerHTML = minutes + ":" + seconds;
-}
-
-
-// Start timer
-function startTimer() {
-
-    // Prevent multiple timers running at once
-    if (timerRunning) {
-        return;
-    }
-
-    timerRunning = true;
-
-    timerInterval = setInterval(function() {
-
-        if (time > 0) {
-
-            time--;
-
-            updateTimer();
-
-        } else {
-
-            clearInterval(timerInterval);
-
-            timerRunning = false;
-
-            alert("Pomodoro session complete!");
-
-        }
-
-    }, 1000);
-}
-
-
-// Pause timer
-function pauseTimer() {
-
-    clearInterval(timerInterval);
-
-    timerRunning = false;
-
-}
-
-
-// Reset timer
-function resetTimer() {
-
-    clearInterval(timerInterval);
-
-    timerRunning = false;
-
-    time = 25 * 60;
-
-    updateTimer();
-
-}
-
-
-// =================================
-// STARTUP
-// =================================
+// ==========================================
+// RUN WHEN PAGE LOADS
+// ==========================================
 
 displayHomework();
-
-updateTimer();
-```
