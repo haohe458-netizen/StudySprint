@@ -1,0 +1,161 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>StudySprint Pomodoro</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<nav>
+
+    <h2 class="logo">StudySprint</h2>
+
+    <a href="homepage.htm">
+        Dashboard
+    </a>
+
+    <a href="data.htm">
+        Planner
+    </a>
+
+    <a href="other.htm" class="active">
+        Pomodoro
+    </a>
+
+</nav>
+
+
+<div class="container">
+
+    <div class="page-heading">
+
+        <h1>Pomodoro Timer</h1>
+
+        <p class="subtitle">
+            Focus for 25 minutes.
+        </p>
+
+    </div>
+
+
+    <div class="card timer-card">
+
+        <h2 id="timer">
+            25:00
+        </h2>
+
+        <br>
+
+        <button type="button" onclick="startTimer()">
+            Start
+        </button>
+
+        <button type="button" onclick="pauseTimer()">
+            Pause
+        </button>
+
+        <button type="button" onclick="resetTimer()">
+            Reset
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let time = 25 * 60;
+
+let timerInterval = null;
+
+
+// Update the timer on the screen
+function updateTimer() {
+
+    let minutes = Math.floor(time / 60);
+
+    let seconds = time % 60;
+
+    if (seconds < 10) {
+        seconds = "0" + seconds;
+    }
+
+    document.getElementById("timer").textContent =
+        minutes + ":" + seconds;
+}
+
+
+// Start
+function startTimer() {
+
+    if (timerInterval !== null) {
+        return;
+    }
+
+    timerInterval = setInterval(function() {
+
+        if (time > 0) {
+
+            time--;
+
+            updateTimer();
+
+        } else {
+
+            clearInterval(timerInterval);
+
+            timerInterval = null;
+
+            alert("Pomodoro session complete!");
+
+        }
+
+    }, 1000);
+
+}
+
+
+// Pause
+function pauseTimer() {
+
+    clearInterval(timerInterval);
+
+    timerInterval = null;
+
+}
+
+
+// Reset
+function resetTimer() {
+
+    clearInterval(timerInterval);
+
+    timerInterval = null;
+
+    time = 25 * 60;
+
+    updateTimer();
+
+}
+
+
+updateTimer();
+
+</script>
+
+</body>
+
+</html>
+```

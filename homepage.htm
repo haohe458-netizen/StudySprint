@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>StudySprint Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
+```
+
+</head>
+
+<body>
+
+<nav>
+
+```
+<h2 class="logo">
+    StudySprint
+</h2>
+
+<a href="homepage.htm" class="active">
+    Dashboard
+</a>
+
+<a href="data.htm">
+    Planner
+</a>
+
+<a href="other.htm">
+    Pomodoro
+</a>
+```
+
+</nav>
+
+<div class="container">
+
+```
+<!-- WELCOME -->
+
+<div class="page-heading">
+
+    <h1 id="message">
+        Welcome back!
+    </h1>
+
+    <p id="userRole"></p>
+
+    <p class="subtitle">
+        Keep track of your homework and study progress.
+    </p>
+
+</div>
+
+
+<!-- UPCOMING HOMEWORK -->
+
+<div class="card">
+
+    <h2>Upcoming Homework</h2>
+
+    <br>
+
+    <div id="homeworkList">
+
+        <p>
+            No homework added yet.
+        </p>
+
+    </div>
+
+</div>
+
+
+<br>
+
+
+<!-- DASHBOARD INFORMATION -->
+
+<div class="dashboard-grid">
+
+    <!-- STUDY GOAL -->
+
+    <div class="card">
+
+        <h2>Study Goal</h2>
+
+        <br>
+
+        <p>
+            7.5 / 10 hours completed
+        </p>
+
+        <br>
+
+        <div class="progress-container">
+
+            <div
+                class="progress"
+                style="width: 75%;">
+            </div>
+
+        </div>
+
+        <p>
+            75% complete
+        </p>
+
+    </div>
+
+
+    <!-- QUICK ACTIONS -->
+
+    <div class="card">
+
+        <h2>Quick Actions</h2>
+
+        <br>
+
+        <a href="data.htm">
+
+            <input
+                type="button"
+                value="+ Add Homework">
+
+        </a>
+
+        <br><br>
+
+        <a href="other.htm">
+
+            <input
+                type="button"
+                value="Start Pomodoro">
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<br>
+
+
+<!-- TEACHER AREA -->
+
+<div
+    id="teacherArea"
+    class="card">
+
+    <h2>Teacher/Admin Area</h2>
+
+    <br>
+
+    <p>
+        Manage student information and monitor
+        student progress.
+    </p>
+
+</div>
+```
+
+</div>
+
+<footer>
+
+```
+StudySprint © 2026
+```
+
+</footer>
+
+<script src="script.js"></script>
+
+<script>
+
+// ==========================================
+// DISPLAY USER NAME
+// ==========================================
+
+let name = new URLSearchParams(window.location.search).get("name");
+
+if (name) {
+
+    document.getElementById("message").innerHTML =
+        "Hello " + name + "!";
+
+}
+
+
+// ==========================================
+// GET USER ROLE
+// ==========================================
+
+let role = localStorage.getItem("userRole");
+
+
+// ==========================================
+// DISPLAY USER ROLE
+// ==========================================
+
+if (role) {
+
+    document.getElementById("userRole").innerHTML =
+        "Logged in as: <b>" + role + "</b>";
+
+}
+
+
+// ==========================================
+// TEACHER / ADMIN AREA
+// ==========================================
+
+if (role === "Teacher" || role === "Admin") {
+
+    document.getElementById("teacherArea").style.display =
+        "block";
+
+}
+else {
+
+    document.getElementById("teacherArea").style.display =
+        "none";
+
+}
+
+</script>
+
+</body>
+
+</html>
