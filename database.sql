@@ -1,5 +1,3 @@
--- CREATE HOMEWORK TABLE
-
 CREATE TABLE Homework (
 
     id INTEGER PRIMARY KEY,
@@ -14,8 +12,6 @@ CREATE TABLE Homework (
 
 );
 
-
--- TEST DATA
 
 INSERT INTO Homework
 (subject, task, due_date, priority)
@@ -53,26 +49,18 @@ VALUES
 );
 
 
--- SHOW ALL HOMEWORK
-
 SELECT * FROM Homework;
 
-
--- SEARCH FOR MATHS
 
 SELECT *
 FROM Homework
 WHERE subject = 'Maths';
 
 
--- SEARCH FOR HIGH PRIORITY
-
 SELECT *
 FROM Homework
 WHERE priority = 'High';
 
-
--- ORDER BY DUE DATE
 
 SELECT *
 FROM Homework
