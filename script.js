@@ -1,14 +1,8 @@
-// ==========================================
-// STUDYSPRINT HOMEWORK SYSTEM
-// ==========================================
 
-
-// ADD HOMEWORK
 function addHomework(event) {
 
     event.preventDefault();
 
-    // Get the information from the form
     let subject =
         document.getElementById("subject").value;
 
@@ -21,8 +15,6 @@ function addHomework(event) {
     let priority =
         document.getElementById("priority").value;
 
-
-    // Create a homework object
     let homework = {
 
         subject: subject,
@@ -36,16 +28,12 @@ function addHomework(event) {
     };
 
 
-    // Get existing homework
     let homeworkList =
         JSON.parse(localStorage.getItem("homework")) || [];
 
 
-    // Add the new homework
     homeworkList.push(homework);
 
-
-    // Save homework
     localStorage.setItem(
         "homework",
         JSON.stringify(homeworkList)
@@ -66,7 +54,6 @@ function addHomework(event) {
         "<b>Priority:</b> " + priority;
 
 
-    // Clear the form
     document.getElementById("subject").value = "";
 
     document.getElementById("task").value = "";
@@ -78,10 +65,6 @@ function addHomework(event) {
 }
 
 
-// ==========================================
-// DISPLAY HOMEWORK ON DASHBOARD
-// ==========================================
-
 function displayHomework() {
 
     let homeworkList =
@@ -91,14 +74,10 @@ function displayHomework() {
     let container =
         document.getElementById("homeworkList");
 
-
-    // Make sure the dashboard element exists
     if (!container) {
         return;
     }
 
-
-    // If there is no homework
     if (homeworkList.length === 0) {
 
         container.innerHTML =
@@ -108,11 +87,9 @@ function displayHomework() {
     }
 
 
-    // Clear the container
     container.innerHTML = "";
 
 
-    // Display every homework task
     homeworkList.forEach(function(homework, index) {
 
         let homeworkItem =
@@ -154,9 +131,6 @@ function displayHomework() {
 }
 
 
-// ==========================================
-// DELETE HOMEWORK
-// ==========================================
 
 function deleteHomework(index) {
 
@@ -164,18 +138,13 @@ function deleteHomework(index) {
         JSON.parse(localStorage.getItem("homework")) || [];
 
 
-    // Remove the selected homework
     homeworkList.splice(index, 1);
 
-
-    // Save the updated list
     localStorage.setItem(
         "homework",
         JSON.stringify(homeworkList)
     );
 
-
-    // Refresh the dashboard
     displayHomework();
 
 }
