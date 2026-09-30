@@ -106,24 +106,14 @@ function loginUser(event) {
     event.preventDefault();
 
 
-    // Get the user's name
-
     let name =
         document.getElementById("name").value;
-
-
-    // Get the selected role
 
     let role =
         document.getElementById("role").value;
 
 
-    // Store the role
-
     localStorage.setItem("userRole", role);
-
-
-    // Send the user to the dashboard
 
     window.location.href =
         "homepage.htm?name=" +
