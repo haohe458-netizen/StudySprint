@@ -80,8 +80,6 @@ let time = 25 * 60;
 
 let timerInterval = null;
 
-
-// Update the timer on the screen
 function updateTimer() {
 
     let minutes = Math.floor(time / 60);
@@ -97,7 +95,6 @@ function updateTimer() {
 }
 
 
-// Start
 function startTimer() {
 
     if (timerInterval !== null) {
@@ -126,8 +123,6 @@ function startTimer() {
 
 }
 
-
-// Pause
 function pauseTimer() {
 
     clearInterval(timerInterval);
@@ -137,7 +132,6 @@ function pauseTimer() {
 }
 
 
-// Reset
 function resetTimer() {
 
     clearInterval(timerInterval);
